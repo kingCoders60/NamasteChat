@@ -1,0 +1,9 @@
+What Technologies we are using....
+1)Express->Gives us a lot of features like router middleware etc..
+2)Conencted MongoDB Cluster.
+3)For generating a token we need a enviroment variable which we will store in .env
+Jwt has the concept of payload.
+In Utils , we have used httpOnly: It prevensts XSS attacks cross-site scripting attcks.
+JWT-json web token->unqiue id given to each user.
+Middleware: If a function in authentication is successful, the next middleware will still execute.
+6)Cookie-Parser: This will allow to parse the cookie.
