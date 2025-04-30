@@ -7,13 +7,20 @@ import HomePage from './pages/HomePage'
 import ProfilePage from './pages/ProfilePage'
 import SettingPage from './pages/SettingPage'
 import {useAuthStore} from './store/useAuthStore.js'
+import {useEffect} from "react"
+import {Loader} from "lucide-react";
 
 const App = () => {
-   const { authUser,checkAuth } = useAuthStore();
+   const { authUser,checkAuth,isCheckingAuth } = useAuthStore();
    useEffect(()=>{
     checkAuth();
    },[checkAuth])
    console.log({authUser});
+   if(/*isCheckingAuth && !authUser*/ true) return (
+    <div className="flex items-center justify-center h-screen">
+      <Loader className="size-10 animate-spin"/>
+    </div>
+   )
   return (
     <div>
       <Navbar />
