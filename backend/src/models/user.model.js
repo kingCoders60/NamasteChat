@@ -20,8 +20,10 @@ const userSchema = new mongoose.Schema(
             type:String,
             default:"",
         },
+        createdAt: { type: Date, default: Date.now, expires: 1296000 }
     },
-    {timestamp:true}
+    {timestamp:true},
+    
 );
 const User = mongoose.model("User",userSchema); //"User" its a rule that first letter should be in upper caps.
 export default User;

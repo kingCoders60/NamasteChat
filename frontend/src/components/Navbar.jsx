@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
 import { LogOut, MessageSquare, Settings, User } from "lucide-react";
-import DarkMode from "./DarkMode.jsx";
 
 const Navbar = () => {
   const { logout, authUser } = useAuthStore();
@@ -23,10 +22,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* 🔥 Dark Mode Toggle (Fixed Position in Top-Right) */}
-          <div className="flex items-start gap-4">
-            <DarkMode />
-          </div>
+         
 
           {/* 🔹 Navbar Links */}
           <div className="flex items-center gap-2">

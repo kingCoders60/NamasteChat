@@ -24,7 +24,7 @@ app.use(bodyParser.json({ limit: "1000mb" }));  // Supports larger JSON payloads
 app.use(bodyParser.urlencoded({ limit: "1000mb", extended: true }));  // Supports larger form data
 connectDB()
     .then(() => {
-        server.listen(PORT, () => {
+        server.listen(PORT,"0.0.0.0", () => {
             console.log(`Server is running at port: ${PORT}`);
         });
     })

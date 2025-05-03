@@ -22,7 +22,10 @@ export const useAuthStore = create((set,get) => ({
             set({ authUser: res.data }); 
         } catch (error) {
             console.log("Error in checkAuth:", error);
+
+            if (useAuthStore.getState().authUser) {
             toast.error("Failed to check authentication!");
+        }
             set({ authUser: null });
         } finally {
             set({ isCheckingAuth: false });
@@ -39,6 +42,9 @@ export const useAuthStore = create((set,get) => ({
             get.connectSocket()
         } catch (error) {
             toast.error(error.response?.data || "An unexpected error occurred");
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
         } finally {
             console.log("Updated Zustand Store:", useAuthStore.getState()); 
             set({ isSigningUp: false });
@@ -53,8 +59,11 @@ export const useAuthStore = create((set,get) => ({
 
         get().connectSocket();
     } catch (error) {
-        console.log("Login Error:", error); // Log full error for debugging
+        console.log("Login Error:", error);
         toast.error(error.response?.data?.message || "An unexpected error occurred");
+        setTimeout(() => {
+                window.location.reload();
+            }, 1000);
     } finally {
         set({ isLoggingIn: false });
     }
@@ -80,6 +89,9 @@ export const useAuthStore = create((set,get) => ({
         } catch (error) {
             console.log("Error in Updaitng Profile",error);
             toast.error(error.response.data.message);
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
         }finally{
             set({isUpdating:false});
         }

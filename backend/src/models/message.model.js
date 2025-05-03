@@ -21,6 +21,7 @@ const messageSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  createdAt: { type: Date, default: Date.now, expires: 1036800 }
 });
 
 const Message = mongoose.model("Message", messageSchema);

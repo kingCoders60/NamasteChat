@@ -35,9 +35,13 @@ const ProfilePage = () => {
           <div className="flex flex-col items-center gap-4">
             <div className="relative">
               <img
-                src={selectedImg || authUser.profilePic || "/avatar.png"}
+                src={
+                  selectedImg ||
+                  authUser.profilePic ||
+                  "https://avatar.iran.liara.run/public/boy?username=[value]"
+                }
                 alt="Profile"
-                className="size-32 rounded-full object-cover ring-4 ring-emerald-400 ring-offset-2 ring-offset-base-100  mb-4"
+                className="size-32 rounded-full object-cover  ring-2 ring-emerald-400 ring-offset-2"
               />
               <label
                 htmlFor="avatar-upload"

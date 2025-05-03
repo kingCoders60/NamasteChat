@@ -7,14 +7,15 @@ import HomePage from './pages/HomePage'
 import ProfilePage from './pages/ProfilePage'
 import SettingsPage from "./pages/SettingsPage";
 import {useAuthStore} from './store/useAuthStore.js'
+import {useThemeStore} from "./store/useThemeStore"
 import {useEffect} from "react"
 import {Loader} from "lucide-react";
 import { Navigate } from "react-router-dom";
 import {Toaster} from "react-hot-toast"
 
-
 const App = () => {
     const { authUser, checkAuth, isCheckingAuth, onlineUsers } = useAuthStore();
+    const {theme}=useThemeStore();
 
     console.log({ onlineUsers });
 
@@ -32,7 +33,7 @@ const App = () => {
       );
 
   return (
-    <div>
+    <div data-theme={theme}>
       <Navbar className="swap swap-rotate" />
       <Routes>
         <Route
@@ -41,17 +42,17 @@ const App = () => {
         />
         <Route
           path="/signup"
-          element={!authUser ? <SignUpPage /> : <Navigate to="/" />}
+          element={authUser===null ? <SignUpPage /> : <Navigate to="/" />}
         />
         <Route
           path="/login"
           element={!authUser ? <LoginPage /> : <Navigate to="/" />}
         />
-        <Route path="/settings" element={<SettingsPage />} />
         <Route
           path="/profile"
           element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
         />
+        <Route path="/settings" element={<SettingsPage/>}/>
       </Routes>
       <Toaster />
     </div>
