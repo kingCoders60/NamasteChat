@@ -71,8 +71,8 @@ const SettingsPage = () => {
                       />
                     </div>
                     <div>
-                      <h3 className="font-medium text-sm">John Doe</h3>
-                      <p className="text-xs text-base-content/70">Online</p>
+                      <h3 className="font-medium text-sm">Mr Patra</h3>
+                      <p className="text-xs text-base-content/70 animate-pulse">Online</p>
                     </div>
                   </div>
                 </div>

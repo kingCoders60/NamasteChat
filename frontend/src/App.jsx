@@ -12,7 +12,6 @@ import {useEffect} from "react"
 import {Loader} from "lucide-react";
 import { Navigate } from "react-router-dom";
 import {Toaster} from "react-hot-toast"
-import Footer from "./components/Footer.jsx"
 
 const App = () => {
     const { authUser, checkAuth, isCheckingAuth, onlineUsers } = useAuthStore();
@@ -56,7 +55,6 @@ const App = () => {
         <Route path="/settings" element={<SettingsPage/>}/>
       </Routes>
       <Toaster />
-      <Footer/>
     </div>
   );
 }
