@@ -14,14 +14,14 @@ const messageSchema = new mongoose.Schema({
   text: {
     type: String,
   },
-  image:{
-    type:String
+  image: {
+    type: String,
   },
   timestamp: {
     type: Date,
     default: Date.now,
   },
-  createdAt: { type: Date, default: Date.now, expires: 1036800 }
+  createdAt: { type: Date, default: Date.now, expires: 172800 },
 });
 
 const Message = mongoose.model("Message", messageSchema);
