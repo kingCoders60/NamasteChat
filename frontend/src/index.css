@@ -3,3 +3,12 @@
 @plugin "daisyui" {
     themes: all;
 }
+.footer {
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+    padding: 10px;
+    background: inherit;
+    width: 100%;
+    position: relative;
+}
