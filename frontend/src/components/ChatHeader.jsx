@@ -20,7 +20,6 @@ const ChatHeader = () => {
             </div>
           </div>
 
-          {/* User info */}
           <div>
             <h3 className="font-medium">
               {selectedUser?.fullName || "Unknown User"}
