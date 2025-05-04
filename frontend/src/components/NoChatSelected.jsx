@@ -8,7 +8,7 @@ const NoChatSelected = () => {
         <div className="flex justify-center gap-4 mb-4">
           <div className="relative">
             <div>
-              <div className="tooltip" data-tip="With Love">
+              <div className="tooltip" data-tip="With Love from shivam">
                 <span className="text-5xl  cursor-pointer animate-pulse">
                   ❤️
                 </span>
