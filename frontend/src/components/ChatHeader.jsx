@@ -66,6 +66,7 @@ const ChatHeader = () => {
         )}
       </div>
 
+      {/* Profile Picture Popup */}
       {popupImage && (
         <div
           className="fixed inset-5 bg-opacity-50 flex items-center justify-center border-rounded-lg"
@@ -81,6 +82,6 @@ const ChatHeader = () => {
       )}
     </div>
   );
-};
+};/**/
 
 export default ChatHeader;
