@@ -7,6 +7,7 @@ export const useChatStore = create((set, get) => ({
   messages: [],
   users: [],
   selectedUser: null,
+  lastSeen: null,
   isUserLoading: false,
   isMessagesLoading: false,
 
@@ -52,12 +53,41 @@ export const useChatStore = create((set, get) => ({
     }
   },
 
+  markMessageAsRead: async (messageId) => {
+    try {
+      await axiosInstance.put(`/messages/read/${messageId}`);
+
+      // Emit WebSocket event to notify sender
+      const socket = useAuthStore.getState().socket;
+      if (socket && socket.connected) {
+        socket.emit("messageRead", messageId);
+      }
+
+      set((state) => ({
+        messages: state.messages.map((msg) =>
+          msg._id === messageId ? { ...msg, read: true } : msg
+        ),
+      }));
+    } catch (error) {
+      console.error("Error marking message as read:", error);
+    }
+  },
+
+  getLastSeen: async (userId) => {
+    try {
+      const res = await axiosInstance.get(`/users/${userId}`);
+      set({ lastSeen: res.data.lastSeen });
+    } catch (error) {
+      console.error("Error fetching last seen:", error);
+      set({ lastSeen: null });
+    }
+  },
+
   subscribeToMessages: () => {
     const { selectedUser } = get();
     if (!selectedUser) return;
 
     const socket = useAuthStore.getState().socket;
-
     if (!socket || !socket.connected) {
       console.error("WebSocket is not initialized or connected.");
       return;
@@ -68,11 +98,25 @@ export const useChatStore = create((set, get) => ({
         set({ messages: [...get().messages, newMessage] });
       }
     });
+
+    // Listen for read receipt updates
+    socket.on("updateMessageStatus", (updatedMessage) => {
+      set((state) => ({
+        messages: state.messages.map((msg) =>
+          msg._id === updatedMessage._id
+            ? { ...msg, read: updatedMessage.read }
+            : msg
+        ),
+      }));
+    });
   },
 
   unsubscribeFromMessages: () => {
     const socket = useAuthStore.getState().socket;
-    if (socket) socket.off("newMessage");
+    if (socket) {
+      socket.off("newMessage");
+      socket.off("updateMessageStatus");
+    }
   },
 
   setSelectedUser: (selectedUser) => {

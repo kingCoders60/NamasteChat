@@ -3,8 +3,14 @@ import { useAuthStore } from "../store/useAuthStore";
 import { useChatStore } from "../store/useChatStore";
 
 const ChatHeader = () => {
-  const { selectedUser, setSelectedUser } = useChatStore();
+  const { selectedUser, setSelectedUser, lastSeen } = useChatStore(); // ✅ Get lastSeen from Zustand
   const { onlineUsers } = useAuthStore();
+
+  // Format last seen date
+  const formattedLastSeen = lastSeen
+    ? new Date(lastSeen).toLocaleString()
+    : "Unknown";
+    
 
   return (
     <div className="p-2.5 border-b border-base-300">
@@ -28,7 +34,7 @@ const ChatHeader = () => {
               {selectedUser?._id && Array.isArray(onlineUsers)
                 ? onlineUsers.includes(selectedUser._id)
                   ? "Online"
-                  : "Offline"
+                  : `Last seen at ${formattedLastSeen}` // ✅ Show last seen instead of "Offline"
                 : "Status Unknown"}
             </p>
           </div>

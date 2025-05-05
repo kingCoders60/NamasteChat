@@ -6,16 +6,21 @@ import { useChatStore } from "../store/useChatStore";
 import { useAuthStore } from "../store/useAuthStore";
 import { formatMessageTime } from "../lib/utils";
 const ChatContainer = () => {
-  const { messages = [], getMessages, isMessagesLoading, selectedUser,subscribeToMessages,unsubscribeFromMessages} = useChatStore();
+  const {
+    messages = [],
+    getMessages,
+    isMessagesLoading,
+    selectedUser,
+    subscribeToMessages,
+    unsubscribeFromMessages,
+  } = useChatStore();
 
   const { authUser } = useAuthStore();
   const messageEndRef=useRef(null);
 /**/ 
 
   useEffect(() => {
-    if (selectedUser?._id) {
-      getMessages(selectedUser._id);
-    }
+        
     subscribeToMessages();
     return () => unsubscribeFromMessages();
   }, [selectedUser, getMessages, subscribeToMessages, unsubscribeFromMessages]);
@@ -34,6 +39,7 @@ const ChatContainer = () => {
       </div>
     );
   }
+  
 
   return (
     <div className="flex-1 flex flex-col overflow-auto">
