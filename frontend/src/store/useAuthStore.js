@@ -125,7 +125,15 @@ export const useAuthStore = create((set, get) => ({
   disconnectSocket: () => {
     const socket = get().socket;
     if (socket?.connected) {
-      console.log("Disconnecting WebSocket...");
+      const disconnectTime = new Date().toISOString(); // Get timestamp in standard format
+
+      console.log(
+        `User last seen at: ${new Date(disconnectTime).toLocaleString()}`
+      );
+
+      // ✅ Update last seen in useAuthStore
+      useAuthStore.setState({ lastSeen: disconnectTime });
+
       socket.disconnect();
       set({ socket: null });
     }

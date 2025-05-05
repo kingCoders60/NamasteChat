@@ -38,10 +38,10 @@ const ProfilePage = () => {
                 src={
                   selectedImg ||
                   authUser.profilePic ||
-                  "https://avatar.iran.liara.run/public/boy?username=[value]"
+                  "avatar.png"
                 }
                 alt="Profile"
-                className="size-32 rounded-full object-cover  ring-2 ring-emerald-400 ring-offset-2"
+                className="size-32 rounded-full object-cover  ring-2"
               />
               <label
                 htmlFor="avatar-upload"
@@ -103,7 +103,7 @@ const ProfilePage = () => {
               </div>
               <div className="flex items-center justify-between py-2">
                 <span>Account Status</span>
-                <span className="text-green-500">Active</span>
+                <span className="text-green-500 animate-pulse">Active</span>
               </div>
             </div>
           </div>
